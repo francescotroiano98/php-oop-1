@@ -6,14 +6,15 @@ class Movie {
     public $originaltitle;
     public $description;
     public $type;
+    public $actorsList;
     
     
-    function __construct($_title, $_originaltitle, $_description, $_type){
+    function __construct($_title, $_originaltitle, $_description, $_type, $_actorsList = array()){
         $this->title = $_title;
         $this->originaltitle = $_originaltitle;
         $this->description = $_description;
         $this->type = $_type;
-        $this->actorsList = array();
+        $this->actorsList = $_actorsList;
     }
 
 
@@ -85,10 +86,13 @@ $titanic->addActor($mainActor);
 
 $titanic->addActor($secondaryActor);
 
+$anotherActor = new Actors('Brad', 'Pitt', 'Main character');
+$anotherMovie = new Movie('Fight Club', 'Fight Club', 'Il film "Fight Club" segue le vicende di un uomo insoddisfatto che, insieme a un misterioso personaggio, fonda un club segreto in cui le persone si sfidano in incontri violenti per sfogare le loro frustrazioni.', 'drammatico', array($anotherActor));
 
 
 
-var_dump($titanic);
+var_dump($titanic, $anotherMovie);
+
 ?>
 
 
@@ -144,7 +148,34 @@ var_dump($titanic);
                     </li>
                 <?php } ?>
             </ul>
-        </section>    
+        </section>
+        <section style="width: 20%;">
+        <h2> Title:
+            <?php echo $anotherMovie->getTitle(); ?>
+        </h2>
+
+        <h3>Original Title:
+            <?php echo $anotherMovie->getOriginalTitle(); ?>
+        </h3>
+
+        <p>Description:
+            <?php echo $anotherMovie->getDescription(); ?>
+        </p>
+
+        <p>Type:
+            <?php echo $anotherMovie->getType(); ?>
+        </p>
+
+        <ul>Characters:
+            <?php foreach ($anotherMovie->actorsList as $actor) { ?>
+                <li style="margin-left: 20%;">
+                    <?php echo $actor->getName(); ?>
+                    <?php echo $actor->getSurname(); ?>
+                    <?php echo $actor->getRole(); ?>
+                </li>
+            <?php } ?>
+        </ul>
+    </section>    
     </main>
     </body>
 </html>
