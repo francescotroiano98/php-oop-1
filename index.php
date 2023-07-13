@@ -6,12 +6,14 @@ class Movie {
     public $originaltitle;
     public $description;
     public $type;
+    public $actors;
     
-    function __construct($_title, $_originaltitle, $_description, $_type){
+    function __construct($_title, $_originaltitle, $_description, $_type, $_actors){
         $this->title = $_title;
         $this->originaltitle = $_originaltitle;
         $this->description = $_description;
         $this->type = $_type;
+        $this->actors = $_actors;
     }
 
 
@@ -39,13 +41,43 @@ class Movie {
     
 }
 
-$titanic = new Movie('Titanic', 'Titanic', '
-Il film "Titanic" è un epica storia di amore ambientata sul celebre transatlantico. Quando una giovane donna di classe alta si innamora di un artista povero a bordo della nave, i loro destini si intrecciano in un tragico evento che definisce il loro amore e la loro sopravvivenza.', 'dramma romantico e storico');
+class Actors {
 
-echo $titanic->getTitle();
-echo $titanic->getOriginalTitle();
-echo $titanic->getDescription();
-echo $titanic->getType();
+    public $name;
+    public $surname;
+    public $role;
+
+    function __construct($_name, $_surname, $_role){
+        $this->name = $_name;
+        $this->surname = $_surname;
+        $this->role = $_role;
+    }
+
+    public function getName() {
+
+        return $this->name;
+            
+    }
+    public function getSurname() {
+
+        return $this->surname;
+            
+    }
+    public function getRole() {
+
+        return $this->role;
+            
+    }
+
+}
+
+$mainActor = new Actors ('Leonardo  ', 'Di Caprio', ' Main character');
+
+$titanic = new Movie('Titanic', 'Titanic', '
+Il film "Titanic" è un epica storia di amore ambientata sul celebre transatlantico. Quando una giovane donna di classe alta si innamora di un artista povero a bordo della nave, i loro destini si intrecciano in un tragico evento che definisce il loro amore e la loro sopravvivenza.', 'dramma romantico e storico', $mainActor);
+
+
+
 
 var_dump($titanic);
 ?>
@@ -64,33 +96,51 @@ var_dump($titanic);
         <h1>I TUOI FILM</h1>
     </header>
     <main>
-        <h2> Title:
+        <section style="width: 20%;">
+
+       
+            <h2> Title:
+                <?php
+                    echo $titanic->getTitle();
+                ?>
+            </h2>
+
+            <h3>Original Title:
             <?php
-                echo $titanic->getTitle();
+                echo $titanic->getOriginalTitle();
             ?>
-        </h2>
+            </h3>
+            
+            <p>Description:
+                <?php
 
-        <h3>Original Title:
-        <?php
-            echo $titanic->getOriginalTitle();
-        ?>
-        </h3>
-        
-        <p>Description:
-            <?php
+                    echo $titanic->getDescription();
+                    
+                ?>
+            </p>
 
-                echo $titanic->getDescription();
-                
-            ?>
-        </p>
+            <p>Type:
+                <?php
 
-        <p>Type:
-            <?php
+                    echo $titanic->getType();
+                    
+                ?>
+            </p>
+            <ul>Role:<?php
 
-                echo $titanic->getType();
-                
-            ?>
-        </p>
+                    echo $mainActor->getRole();
+
+                ?>
+                <li style="margin-left: 20%;">
+                    <?php
+
+                        echo $mainActor->getName();
+                        echo $mainActor->getSurname();
+
+                    ?>
+                </li>
+            </ul>
+        </section>    
     </main>
     </body>
 </html>
