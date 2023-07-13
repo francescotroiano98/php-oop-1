@@ -6,14 +6,14 @@ class Movie {
     public $originaltitle;
     public $description;
     public $type;
-    public $actors;
     
-    function __construct($_title, $_originaltitle, $_description, $_type, $_actors){
+    
+    function __construct($_title, $_originaltitle, $_description, $_type){
         $this->title = $_title;
         $this->originaltitle = $_originaltitle;
         $this->description = $_description;
         $this->type = $_type;
-        $this->actors = $_actors;
+        $this->actorsList = array();
     }
 
 
@@ -37,6 +37,9 @@ class Movie {
 
             return $this->type;
                 
+        }
+        public function addActor($actor) {
+            $this->actorsList[] = $actor;
         }
     
 }
@@ -73,8 +76,14 @@ class Actors {
 
 $mainActor = new Actors ('Leonardo  ', 'Di Caprio', ' Main character');
 
+$secondaryActor = new Actors('Kate', 'Winslet', 'Secondary character');
+
 $titanic = new Movie('Titanic', 'Titanic', '
-Il film "Titanic" è un epica storia di amore ambientata sul celebre transatlantico. Quando una giovane donna di classe alta si innamora di un artista povero a bordo della nave, i loro destini si intrecciano in un tragico evento che definisce il loro amore e la loro sopravvivenza.', 'dramma romantico e storico', $mainActor);
+Il film "Titanic" è un epica storia di amore ambientata sul celebre transatlantico. Quando una giovane donna di classe alta si innamora di un artista povero a bordo della nave, i loro destini si intrecciano in un tragico evento che definisce il loro amore e la loro sopravvivenza.', 'dramma romantico e storico');
+
+$titanic->addActor($mainActor);
+
+$titanic->addActor($secondaryActor);
 
 
 
@@ -126,20 +135,7 @@ var_dump($titanic);
                     
                 ?>
             </p>
-            <ul>Role:<?php
-
-                    echo $mainActor->getRole();
-
-                ?>
-                <li style="margin-left: 20%;">
-                    <?php
-
-                        echo $mainActor->getName();
-                        echo $mainActor->getSurname();
-
-                    ?>
-                </li>
-            </ul>
+            
         </section>    
     </main>
     </body>
