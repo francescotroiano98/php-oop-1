@@ -135,7 +135,15 @@ var_dump($titanic);
                     
                 ?>
             </p>
-            
+            <ul>Characters:
+                <?php foreach ($titanic->actorsList as $actor) { ?>
+                    <li style="margin-left: 20%;">
+                        <?php echo $actor->getName(); ?>
+                        <?php echo $actor->getSurname(); ?>
+                        <?php echo $actor->getRole(); ?>
+                    </li>
+                <?php } ?>
+            </ul>
         </section>    
     </main>
     </body>
